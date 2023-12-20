@@ -1,0 +1,95 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+<div class="container">
+    <div style="margin-bottom: 10px" class="clearfix">
+        <a href="/pretty/add" class="btn btn-success" target="_blank">新建靓号</a>
+
+
+        <div style="float:right; width:300px;" class="input-group">
+            <form method="get">
+
+                <div class="input-group">
+                    <input type="text" class="form-control" name="q" style="display:inline" placeholder="Search for..."
+                           , value="{{search_data}}">
+                    <span class="input-group-btn">
+                <button class="btn btn-default" type="submit">
+                    <span class="glyphicon glyphicon-search" aria-hidden="true" style="display:inline;"></span>
+                </button>
+                 </span>
+
+                </div>
+
+            </form>
+
+        </div><!-- /input-group -->
+
+    </div>
+    <!--    <div style="float:right; width=300px;" class="input-group">-->
+
+
+    <div class="panel panel-default">
+        <div class="panel-heading"><span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>靓号列表</div>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>手机号</th>
+                <th>价格</th>
+                <th>级别</th>
+                <th>状态</th>
+                <th>操作</th>
+            </tr>
+            </thead>
+            <tbody>
+
+            {% for obj in queryset%}
+            <tr>
+                <th>{{obj.id}}</th>
+                <th>{{obj.mobile}}</th>
+                <th>{{obj.price}}</th>
+                <th>{{obj.get_level_display}}</th>
+                <th>{{obj.get_status_display}}</th>
+                <!--                <th>{{obj.create_time|date:"Y-m-d"}}</th>-->
+                <!--                <th>{{obj.depart.title}}</th>-->
+                <!--                <th>{{obj.get_gender_display}}</th>-->
+                <th>
+                    <a href="/pretty/{{obj.id}}/edit/" class="btn btn-primary btn-xs">编辑</a>
+                    <a href="/pretty/{{obj.id}}/delete/" class="btn btn-danger btn-xs">删除</a>
+                </th>
+
+            </tr>
+
+            {% endfor%}
+
+            </tbody>
+        </table>
+    </div>
+
+    <div class="clearfix">
+        <ul class="pagination" style="float:left;">
+            {{page_str}}
+            <li>
+                <form style="float:left;margin-left:-1px" method="get">
+                    <input type="text"
+                           style="position:relative;float:left; display:inline-block; width:100px; border-radius:0;"
+                           class="form-control" name="page" placeholder="Search for...">
+                    <button class="btn btn-default" type="submit">Go!</button>
+                </form>
+            </li>
+
+
+        </ul>
+
+
+    </div>
+    <ul class="pagination">
+        {{ page_string }}
+    </ul>
+
+
+</div>
+
+{% endblock %}
+
+

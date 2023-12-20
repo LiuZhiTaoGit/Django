@@ -1,0 +1,61 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+<div class="container">
+    <div style="margin-bottom: 10px">
+        <a href="/user/add" class="btn btn-success" target="_blank">添加用户</a>
+    </div>
+
+    <div style="margin-bottom: 10px">
+        <a href="/user/model/form/add" class="btn btn-success" target="_blank">添加用户(ModelForm)</a>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading"><span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>用户列表</div>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th> 姓名</th>
+                <th>密码</th>
+                <th>年龄</th>
+                <th>账户余额</th>
+                <th>入职时间</th>
+                <th>部门</th>
+                <th>性别</th>
+                <th>操作</th>
+            </tr>
+            </thead>
+            <tbody>
+
+            {% for obj in queryset%}
+            <tr>
+                <th>{{obj.id}}</th>
+                <th>{{obj.name}}</th>
+                <th>{{obj.password}}</th>
+                <th>{{obj.age}}</th>
+                <th>{{obj.account}}</th>
+                <th>{{obj.create_time|date:"Y-m-d"}}</th>
+                <th>{{obj.depart.title}}</th>
+                <th>{{obj.get_gender_display}}</th>
+                <th>
+                    <a href="/user/{{obj.id}}/edit/" class="btn btn-primary btn-xs">编辑</a>
+                    <a href="/user/{{obj.id}}/delete/" class="btn btn-danger btn-xs">删除</a>
+                </th>
+
+            </tr>
+
+            {% endfor%}
+
+            </tbody>
+        </table>
+    </div>
+     <ul class="pagination">
+        {{ page_string }}
+    </ul>
+
+</div>
+
+{% endblock %}
+
+
